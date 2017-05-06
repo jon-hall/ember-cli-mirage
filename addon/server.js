@@ -2,7 +2,7 @@
 
 import { pluralize, camelize } from './utils/inflector';
 import { toCollectionName } from 'ember-cli-mirage/utils/normalize-name';
-import { getModels } from './ember-data';
+import { getModels, getFactories } from './ember-data';
 import { hasEmberData } from './utils/ember-data';
 import Ember from 'ember';
 import isAssociation from 'ember-cli-mirage/utils/is-association';
@@ -163,6 +163,12 @@ export default class Server {
       let models = {};
       _assign(models, getModels(), config.models || {});
       config.models = models;
+
+      if (config.generateFactoriesForEmberDataModels) {
+        let factories = {};
+        _assign(factories, getFactories(), config.factories || {});
+        config.factories = factories;
+      }
     }
 
     this.db = this.db || new Db();
