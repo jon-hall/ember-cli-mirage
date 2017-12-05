@@ -317,9 +317,10 @@ class Serializer {
           } else {
             let formattedTypeKey = this.keyForPolymorphicForeignKeyType(key);
             let formattedIdKey = this.keyForPolymorphicForeignKeyId(key);
+            let associationData = model[`${key}Id`] || { type: null, id: null };
 
-            newHash[formattedTypeKey] = model[`${key}Id`].type;
-            newHash[formattedIdKey] = model[`${key}Id`].id;
+            newHash[formattedTypeKey] = associationData.type;
+            newHash[formattedIdKey] = associationData.id;
           }
         } else {
           if (this.isCollection(association)) {
