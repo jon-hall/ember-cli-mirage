@@ -299,7 +299,7 @@ class Serializer {
         if (this.isCollection(association)) {
           let formattedKey = this.keyForRelationshipIds(key);
           newHash[formattedKey] = model[`${singularize(key)}Ids`];
-        } else {
+        } else if(model[`${key}Id`]) {
           let formattedTypeKey = this.keyForPolymorphicForeignKeyType(key);
           let formattedIdKey = this.keyForPolymorphicForeignKeyId(key);
 
